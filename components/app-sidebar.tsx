@@ -79,7 +79,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="New Proposal"
-              className="bg-blue-600 hover:bg-blue-700 text-white hover:text-white"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
             >
               <Plus className="size-4" />
               <span>New Proposal</span>

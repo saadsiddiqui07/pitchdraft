@@ -22,8 +22,8 @@ export function PDFPreview({
   onRegenerate,
 }: PDFPreviewProps) {
   return (
-    <Card className="h-full w-full overflow-hidden bg-white shadow-lg">
-      <CardHeader className="flex flex-row items-center justify-between border-b bg-gray-50/50 px-4 py-3">
+    <Card className="h-full w-full overflow-hidden bg-card shadow-lg">
+      <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-3">
         <CardTitle className="text-sm font-medium text-muted-foreground">
           Document Preview
         </CardTitle>
@@ -70,9 +70,9 @@ export function PDFPreview({
             </div>
           </div>
         ) : brief ? (
-          <div className="prose prose-sm max-w-none">
+          <div className="prose prose-sm max-w-none dark:prose-invert">
             <h1 className="text-2xl font-bold mb-4">Project Brief</h1>
-            <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
+            <div className="whitespace-pre-wrap text-foreground leading-relaxed">
               {brief}
             </div>
           </div>

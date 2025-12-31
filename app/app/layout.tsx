@@ -2,6 +2,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import { AppSidebar } from "@/components/app-sidebar"
 import { Separator } from "@/components/ui/separator"
 import { cookies } from "next/headers"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export default async function AppLayout({
   children,
@@ -15,12 +16,15 @@ export default async function AppLayout({
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <div className="flex items-center gap-2 font-medium">
-             Dashboard
+        <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <div className="flex items-center gap-2 font-medium">
+              Dashboard
+            </div>
           </div>
+          <ModeToggle />
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
           {children}

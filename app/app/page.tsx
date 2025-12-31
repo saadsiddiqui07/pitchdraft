@@ -31,11 +31,11 @@ export default function AppPage() {
   const PLACEHOLDER_EXAMPLE = `Paste client email, job post, or meeting notes here…`;
 
   return (
-    <div className="flex h-[calc(100vh-5rem)] flex-col gap-6 p-6">
+    <div className="flex flex-1 flex-col gap-6">
       <div className="flex flex-1 gap-6 min-h-0">
         <div className="flex w-1/2 flex-col gap-4 min-h-0">
-          <Card className="h-full w-full overflow-hidden bg-white shadow-lg flex flex-col">
-            <CardHeader className="border-b bg-gray-50/50 px-4 py-3 shrink-0">
+          <Card className="h-full w-full overflow-hidden bg-card shadow-lg flex flex-col">
+            <CardHeader className="border-b px-4 py-3 shrink-0">
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 Add Client Brief
               </CardTitle>
@@ -44,7 +44,7 @@ export default function AppPage() {
               <Textarea
                 id="brief"
                 placeholder={PLACEHOLDER_EXAMPLE}
-                className="flex-1 resize-none p-4 text-base min-h-0 border-0 focus-visible:ring-0 rounded-none"
+                className="flex-1 resize-none p-4 text-base min-h-0 border-0 focus-visible:ring-0 rounded-none bg-transparent dark:bg-transparent"
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
               />
