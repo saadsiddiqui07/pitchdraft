@@ -1,4 +1,5 @@
 import { Copy, Download, MoreVertical, RefreshCw } from "lucide-react";
+import { useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ProposalEditor, ProposalEditorRef } from "./editor/proposal-editor";
 
 interface PDFPreviewProps {
   isLoading: boolean;
@@ -21,9 +23,11 @@ export function PDFPreview({
   brief,
   onRegenerate,
 }: PDFPreviewProps) {
+  const editorRef = useRef<ProposalEditorRef>(null);
+
   return (
-    <Card className="h-full w-full overflow-hidden bg-card shadow-lg">
-      <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-3">
+    <Card className="h-full w-full overflow-hidden bg-card shadow-lg flex flex-col">
+      <CardHeader className="flex flex-row items-center justify-between border-b px-4 py-3 shrink-0">
         <CardTitle className="text-sm font-medium text-muted-foreground">
           Document Preview
         </CardTitle>
@@ -35,15 +39,15 @@ export function PDFPreview({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => {}}>
+            <DropdownMenuItem onClick={() => editorRef.current?.downloadPDF()}>
               <Download className="mr-2 h-4 w-4" />
               Download PDF
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(brief)}
+              onClick={() => navigator.clipboard.writeText(editorRef.current?.getHTML() || "")}
             >
               <Copy className="mr-2 h-4 w-4" />
-              Copy Text
+              Copy HTML
             </DropdownMenuItem>
             <DropdownMenuItem onClick={onRegenerate} disabled={isLoading}>
               <RefreshCw className="mr-2 h-4 w-4" />
@@ -52,9 +56,9 @@ export function PDFPreview({
           </DropdownMenuContent>
         </DropdownMenu>
       </CardHeader>
-      <CardContent className="p-8 h-full overflow-y-auto">
+      <CardContent className="p-0 flex-1 overflow-hidden">
         {isLoading ? (
-          <div className="space-y-4">
+          <div className="space-y-4 p-8">
             <Skeleton className="h-8 w-3/4" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-5/6" />
@@ -70,14 +74,9 @@ export function PDFPreview({
             </div>
           </div>
         ) : brief ? (
-          <div className="prose prose-sm max-w-none dark:prose-invert">
-            <h1 className="text-2xl font-bold mb-4">Project Brief</h1>
-            <div className="whitespace-pre-wrap text-foreground leading-relaxed">
-              {brief}
-            </div>
-          </div>
+          <ProposalEditor content={brief} ref={editorRef} />
         ) : (
-          <div className="flex h-full flex-col items-center justify-center text-center text-muted-foreground/50">
+          <div className="flex h-full flex-col items-center justify-center text-center text-muted-foreground/50 p-8">
             <div className="rounded-full bg-muted/50 p-4 mb-4">
               <svg
                 className="h-8 w-8"

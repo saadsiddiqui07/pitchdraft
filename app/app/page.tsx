@@ -23,7 +23,7 @@ export default function AppPage() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     setGeneratedBrief(
-      `Project Brief: ${prompt}\n\nThis is a generated brief based on your input. In a real application, this would be populated with structured data from an AI model, formatted as a proper document.`
+      `<h1>Project Proposal</h1><p><strong>Subject:</strong> ${prompt}</p><p>This is a generated proposal based on your input. You can now edit this document, add images, charts, and more.</p><h2>Executive Summary</h2><p>Our team has analyzed your requirements and prepared this proposal to address your needs effectively.</p>`
     );
     setIsGenerating(false);
   };
